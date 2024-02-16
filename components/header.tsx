@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Grid2X2,
   Heart,
@@ -8,10 +10,23 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { FormEvent } from "react";
+import { useRouter } from "next/navigation";
 
 import { HeaderLink } from "./header-link";
 
 export const Header = () => {
+  const router = useRouter();
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const searchTerm = e.currentTarget.search.value as string;
+    const encodedSearchTerm = encodeURIComponent(searchTerm);
+
+    router.push(`/search?q=${encodedSearchTerm}`);
+  };
+
   return (
     <header className="flex flex-col items-center gap-x-5 bg-walmart px-10 py-7 md:flex-row">
       <Link
@@ -20,9 +35,13 @@ export const Header = () => {
       >
         <Image src="/walmartLogo.svg" alt="author" height={150} width={150} />
       </Link>
-      <form className="flex w-full flex-1 items-center rounded-full bg-white">
+      <form
+        onSubmit={handleSubmit}
+        className="flex w-full flex-1 items-center rounded-full bg-white"
+      >
         <input
-          className="mx-4 flex-1 outline-none placeholder:text-sm"
+          className="mx-4 flex-1 text-black outline-none placeholder:text-sm"
+          name="search"
           size={1}
           type="text"
           placeholder="Search Everything..."
@@ -32,11 +51,26 @@ export const Header = () => {
         </button>
       </form>
       <div className="mt-5 flex whitespace-nowrap md:mt-0">
-        <HeaderLink Icon={Grid2X2} hiddenOnMobile title="Department" />
-        <HeaderLink Icon={LayoutGrid} hiddenOnMobile title="Services" />
-        <HeaderLink Icon={Heart} title="My Items" superText="Reorder" />
-        <HeaderLink Icon={User} title="Account" superText="Sign In" />
-        <HeaderLink Icon={ShoppingCart} title="$0.00" superText="No Items" />
+        <HeaderLink href="/" Icon={Grid2X2} hiddenOnMobile title="Department" />
+        <HeaderLink
+          href="/"
+          Icon={LayoutGrid}
+          hiddenOnMobile
+          title="Services"
+        />
+        <HeaderLink
+          href="/"
+          Icon={Heart}
+          title="My Items"
+          superText="Reorder"
+        />
+        <HeaderLink href="/" Icon={User} title="Account" superText="Sign In" />
+        <HeaderLink
+          href="/basket"
+          Icon={ShoppingCart}
+          title="$0.00"
+          superText="No Items"
+        />
       </div>
     </header>
   );

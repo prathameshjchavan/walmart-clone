@@ -8,6 +8,7 @@ interface HeaderLinkProps {
   hiddenOnMobile?: boolean;
   title: string;
   superText?: string;
+  href: string;
 }
 
 export const HeaderLink = ({
@@ -15,10 +16,11 @@ export const HeaderLink = ({
   hiddenOnMobile,
   title,
   superText,
+  href,
 }: HeaderLinkProps) => {
   return (
     <Link
-      href="/"
+      href={href}
       prefetch={false}
       className={cn(
         "focus:bg-walmart-dark items-center gap-x-2 rounded-full px-4 py-2 text-sm font-bold text-white outline-none transition focus:ring-1 focus:ring-white",
