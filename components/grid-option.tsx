@@ -15,7 +15,7 @@ const GridOption = ({ title, className, image }: GridOptionProps) => {
       className={cn("grid-option relative", className)}
       href={{ pathname: "/search", query: { q: title } }}
     >
-      <h2>{title}</h2>
+      <h2 className="text-xl font-bold">{title}</h2>
       {image && (
         <Image
           src={image}
