@@ -23,6 +23,9 @@ export const fetchSearch = async (searchTerm: string) => {
       Authorization:
         "Basic " + Buffer.from(`${username}:${password}`).toString("base64"),
     },
+    next: {
+      revalidate: 60 * 60, // revalidate every 1 hour
+    },
   })
     .then((res) => res.json())
     .then((data) => {

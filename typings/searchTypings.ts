@@ -13,6 +13,7 @@ export interface Content {
   url: string;
   organic: Organic[];
   parse_status_code: number;
+  total_results: number;
 }
 
 export interface Organic {

@@ -20,7 +20,7 @@ const GridOption = ({ title, className, image }: GridOptionProps) => {
         <Image
           src={image}
           alt={title}
-          layout="fill"
+          fill={true}
           className="rounded-md object-cover opacity-20"
         />
       )}
