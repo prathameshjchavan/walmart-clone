@@ -21,9 +21,10 @@ export interface Organic {
   price: Price;
   title: string;
   rating: Rating;
+  image: string;
   seller: Seller;
   product_id: string;
-  badge?: Badge;
+  badge?: string;
   variants?: Variant[];
 }
 
@@ -36,7 +37,7 @@ export enum Badge {
 
 export interface Price {
   price: number;
-  currency: Currency;
+  currency: string;
 }
 
 export enum Currency {
