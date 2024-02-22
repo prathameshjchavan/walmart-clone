@@ -1,6 +1,6 @@
-import { fetchSearch } from "@/actions/fetch";
+import { fetchSearch } from "@/actions/fetchSearch";
 import Product from "@/components/product";
-import { results } from "@/data/sample";
+import { results } from "@/data/sampleSearchResult";
 
 interface SearchPageProps {
   searchParams: { q: string };

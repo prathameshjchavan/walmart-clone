@@ -1,16 +1,15 @@
 "use server";
 
-import { Result } from "@/typings/searchTypings";
+import { type Result } from "@/typings/searchProduct";
 
-export const fetchSearch = async (searchTerm: string) => {
+export const fetchProduct = async (url: string) => {
   const username = process.env.OXYLABS_USERNAME!;
   const password = process.env.OXYLABS_PASSWORD!;
-
-  const url = new URL(`https://www.walmart.com/search?q=${searchTerm}`);
+  const newUrl = new URL(`https://www.walmart.com${url}`);
 
   const body = {
     source: "universal_ecommerce",
-    url: url.toString(),
+    url: newUrl.toString(),
     geo_location: "United States",
     parse: true,
   };
@@ -24,17 +23,16 @@ export const fetchSearch = async (searchTerm: string) => {
         "Basic " + Buffer.from(`${username}:${password}`).toString("base64"),
     },
     next: {
-      revalidate: 60 * 60, // revalidate every 1 hour
+      revalidate: 60 * 60 * 24, // revalidate every 1 day
     },
   })
     .then((res) => res.json())
     .then((data) => {
-      if (data.results.length === 0) return;
       const result: Result = data.results[0];
 
       return { data: result };
     })
-    .catch((error: Error) => ({ data: null }));
+    .catch(() => ({ data: null }));
 
   return response;
 };
