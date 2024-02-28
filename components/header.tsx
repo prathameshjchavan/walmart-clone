@@ -14,9 +14,13 @@ import { FormEvent } from "react";
 import { useRouter } from "next/navigation";
 
 import { HeaderLink } from "./header-link";
+import { useCartStore } from "@/store";
+import { getCartTotal } from "@/lib/get-cart-total";
 
 export const Header = () => {
   const router = useRouter();
+  const { cart } = useCartStore();
+  const total = getCartTotal(cart);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -47,7 +51,7 @@ export const Header = () => {
           placeholder="Search Everything..."
         />
         <button type="submit" className="group rounded-full p-1 outline-none">
-          <Search className="ring-walmart-dark h-10 w-10 cursor-pointer rounded-full bg-yellow-400 px-2 transition group-focus:ring-2" />
+          <Search className="h-10 w-10 cursor-pointer rounded-full bg-yellow-400 px-2 ring-walmart-dark transition group-focus:ring-2" />
         </button>
       </form>
       <div className="mt-5 flex whitespace-nowrap md:mt-0">
@@ -68,7 +72,7 @@ export const Header = () => {
         <HeaderLink
           href="/basket"
           Icon={ShoppingCart}
-          title="$0.00"
+          title={total}
           superText="No Items"
         />
       </div>
