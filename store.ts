@@ -8,7 +8,7 @@ interface CartState {
   removeFromCart: (product: Content) => void;
 }
 
-const useCartStore = create<CartState>()(
+export const useCartStore = create<CartState>()(
   devtools(
     persist(
       (set, get) => ({
@@ -23,12 +23,12 @@ const useCartStore = create<CartState>()(
             (item) => item.meta.sku === product.meta.sku,
           );
 
-          set(state => {
-            const newCart = [...state.cart]
+          set((state) => {
+            const newCart = [...state.cart];
 
-            newCart.splice(productToRemove, 1)
-            return { cart: newCart }
-          })
+            newCart.splice(productToRemove, 1);
+            return { cart: newCart };
+          });
         },
       }),
       {
