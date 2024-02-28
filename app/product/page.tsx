@@ -20,6 +20,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import AddToCart from "@/components/add-to-cart";
 
 interface ProductPageProps {
   searchParams: {
@@ -29,9 +30,9 @@ interface ProductPageProps {
 
 const ProductPage = async ({ searchParams: { url } }: ProductPageProps) => {
   // const results = await fetchProduct(url);
-  const product = results.data.content;
+  const product = results.data?.content;
 
-  if (!results?.data) return notFound();
+  if (!product) return notFound();
 
   return (
     <div className="flex w-full flex-col p-4 lg:flex-row lg:p-10">
@@ -103,6 +104,7 @@ const ProductPage = async ({ searchParams: { url } }: ProductPageProps) => {
         </p>
 
         {/* Add to Cart Button */}
+        <AddToCart product={product} />
 
         <hr />
         <h3 className="pt-10 text-xl font-bold">Specifications</h3>
