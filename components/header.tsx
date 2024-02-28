@@ -32,7 +32,7 @@ export const Header = () => {
   };
 
   return (
-    <header className="flex flex-col items-center gap-x-5 bg-walmart px-10 py-7 md:flex-row">
+    <header className="sticky top-0 z-50 flex flex-col items-center gap-x-5 bg-walmart px-10 py-7 md:flex-row">
       <Link
         href="/"
         className="mb-5 flex-shrink-0 rounded-md p-2 outline-none ring-white transition focus:ring-1 md:mb-0"
@@ -73,7 +73,7 @@ export const Header = () => {
           href="/basket"
           Icon={ShoppingCart}
           title={total}
-          superText="No Items"
+          superText={cart.length > 0 ? `${cart.length} items` : "No items"}
         />
       </div>
     </header>
