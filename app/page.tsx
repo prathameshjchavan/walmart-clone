@@ -2,7 +2,7 @@ import GridOption from "@/components/grid-option";
 
 export default function Home() {
   return (
-    <main>
+    <main className="flex-1">
       <div className="m-6 grid grid-flow-row-dense grid-cols-1 gap-6 md:grid-cols-4">
         <GridOption
           title="Sweet gifts for less"
